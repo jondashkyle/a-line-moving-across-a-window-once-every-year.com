@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>a-line-moving-across-a-window-once-every-year.com</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        background: #000;
+        text-align: center;
+      }
+
+      div {
+        background: #fff;
+        height: 80%;
+        width: 5%;
+        position: fixed;
+        top: 10%;
+        left: 0;
+        margin: 0 0 0 -2.5%;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+      var winWidth = window.innerWidth
+
+      setup()
+      setInterval(setup, 1000)
+
+      function resize () {
+        winWidth = window.innerWidth
+        setup()
+      }
+
+      function setup () {
+        var d2 = new Date()
+        var day = "January, 1, " + d2.getFullYear()
+        var d1 = new Date(day)
+        var t2 = d2.getTime()
+        var t1 = d1.getTime()
+        var diff = parseInt((t2-t1)/(24*3600*1000))
+        var scale = ( (diff - 0) / (365 - 0) ) * (winWidth - 5) + 0
+        document.querySelector('div').style.left = scale + 'px'
+      }
+
+      resize()
+      window.addEventListener('resize', resize, false)
+    </script>
+  </body>
+</html>
